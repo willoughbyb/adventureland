@@ -5,14 +5,13 @@ var MP_POTION = 'mpot0';
 var CURRENT_MONSTER = 'snake';
 
 load_code('action_hunt');
-load_code('action_party_leader');
+load_code('action_party_member');
 load_code('action_restock');
 load_code('action_upkeep');
 load_code('role_base');
-load_code('role_tank');
+load_code('role_melee');
 
-var role_tank = new TankRole();
-var party_invites_sent = [];
+var role_melee = new MeleeRole();
 
 var IGNORED_EVENTS = ['hit', 'target_hit', 'incoming', 'loot'];
 character.all(function (name, data) {
@@ -24,12 +23,12 @@ character.all(function (name, data) {
 });
 
 setInterval(function () {
-	var invitee = checkParty();
-	if (invitee && canReceiveInvites(invitee)) {
-		game_log('checkParty - inviting ' + invitee);
-		send_party_invite(invitee);
-		return;
+	var invitee = checkPartyInvite();
+	if (invitee) {
+		accept_party_invite(invitee);
+		smart_move(invitee);
 	}
+	if (smart.moving) return;
 
 	if (needsRestock()) {
 		doRestock();
@@ -43,6 +42,6 @@ setInterval(function () {
 
 	if (!attack_mode || character.rip || is_moving(character)) return;
 
-	role_tank.mainLoop();
+	role_melee.mainLoop();
 
 }, 1000 / 4); // Loops every 1/4 seconds.

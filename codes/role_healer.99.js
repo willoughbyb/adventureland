@@ -1,4 +1,5 @@
 var HealerRole = function () { };
+HealerRole.prototype = Object.assign({}, RoleBase.prototype);
 
 HealerRole.prototype.mainLoop = function () {
 	if (get_party()) {
@@ -12,7 +13,7 @@ HealerRole.prototype.mainLoop = function () {
 					character.y + (target.y - character.y) / 2
 				);
 			} else if (can_heal(target)) {
-				set_message("Attacking");
+				set_message("Healing");
 				heal(target);
 			}
 
@@ -21,8 +22,8 @@ HealerRole.prototype.mainLoop = function () {
 		}
 
 		var partyLeader = get_player('Friction');
-		target = checkTarget(partyLeader);
-		if (target) {
+		target = this.checkTarget(partyLeader);
+		if (target && target.hp < target.max_hp) {
 			fightTarget(target);
 			return;
 		}

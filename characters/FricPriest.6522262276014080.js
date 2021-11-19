@@ -8,20 +8,16 @@ load_code('action_hunt');
 load_code('action_party_member');
 load_code('action_restock');
 load_code('action_upkeep');
+load_code('role_base');
 load_code('role_healer');
 
 var role_healer = new HealerRole();
 
-// character.on('party_invite', function (name) {
-// 	game_log('on_party_invite: ' + name);
-// 	// accept_party_invite(name)
-// });
-
+var IGNORED_EVENTS = ['hit', 'target_hit', 'incoming', 'loot'];
 character.all(function (name, data) {
 	data.event_name = name;
 
-	var IGNORE = ['hit', 'target_hit', 'incoming', 'loot'];
-	if (IGNORE.includes(name)) return;
+	if (IGNORED_EVENTS.includes(name)) return;
 
 	log(data);
 });
@@ -35,9 +31,8 @@ setInterval(function () {
 	if (invitee) {
 		accept_party_invite(invitee);
 		smart_move(invitee);
-
-		if (smart.moving) return;
 	}
+	if (smart.moving) return;
 
 	if (needsRestock()) {
 		doRestock();

@@ -23,6 +23,7 @@ function upkeepMP() {
         var used = true;
         if (is_on_cooldown("use_mp")) return;
         if (mp_missing > mp_pot_heal) use_skill('use_mp');
+        else if (character.mp < 10) use_skill('use_mp');
         else used = false;
         if (used) last_potion = new Date();
     }

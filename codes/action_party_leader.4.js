@@ -10,3 +10,7 @@ function checkParty() {
 		}
 	}
 }
+
+function canReceiveInvites(target) {
+	return get_player(target) != null;
+}
