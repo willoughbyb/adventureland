@@ -1,8 +1,9 @@
-var attack_mode = true
+var attack_mode = true;
 
-var HP_POTION = 'hpot0'
-var MP_POTION = 'mpot0'
-var CURRENT_MONSTER = 'snake'
+var HP_POTION = 'hpot0';
+var MP_POTION = 'mpot0';
+var CURRENT_MONSTER = 'snake';
+var CURRENT_MONSTERS = ['osnake', 'snake'];
 
 load_code('action_hunt');
 load_code('action_party_member');

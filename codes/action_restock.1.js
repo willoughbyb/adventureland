@@ -12,9 +12,9 @@ function doRestock() {
 
 function buyPotions() {
 	if (quantity(HP_POTION) < 10) {
-		buy_with_gold(HP_POTION, 300);
+		buy_with_gold(HP_POTION, 4000);
 	}
 	if (quantity(MP_POTION) < 10) {
-		buy_with_gold(MP_POTION, 100);
+		buy_with_gold(MP_POTION, 1000);
 	}
 }

@@ -3,6 +3,7 @@ var attack_mode = true;
 var HP_POTION = 'hpot0';
 var MP_POTION = 'mpot0';
 var CURRENT_MONSTER = 'snake';
+var CURRENT_MONSTERS = ['osnake', 'snake'];
 
 load_code('action_hunt');
 load_code('action_party_leader');
@@ -26,7 +27,7 @@ character.all(function (name, data) {
 setInterval(function () {
 	var invitee = checkParty();
 	if (invitee && canReceiveInvites(invitee)) {
-		game_log('checkParty - inviting ' + invitee);
+		game_log('Inviting ' + invitee);
 		send_party_invite(invitee);
 		return;
 	}
